@@ -1,0 +1,40 @@
+{
+  "scenes": [
+    {
+      "scene_id": 1,
+      "script": "Behavioral modeling shows how software reacts to external events. It's crucial for understanding software functionality.",
+      "visual_description": "Animation of software code responding to various events, with external stimuli represented as arrows pointing at the code.",
+      "duration": 10
+    },
+    {
+      "scene_id": 2,
+      "script": "First, evaluate use-cases thoroughly. This helps us understand how users interact with the system.",
+      "visual_description": "Illustration of a user interacting with software, with a flowchart showing use-cases being analyzed.",
+      "duration": 10
+    },
+    {
+      "scene_id": 3,
+      "script": "Next, identify events that drive these interactions. It's essential to link events to specific objects.",
+      "visual_description": "Visual representation of events like 'clicks' or 'inputs' being mapped to different objects in the system.",
+      "duration": 10
+    },
+    {
+      "scene_id": 4,
+      "script": "Create a sequence for each use-case. This outlines the order of interactions in your model.",
+      "visual_description": "Sequence diagrams showing the order of events and interactions taking place, with clear labels for each step.",
+      "duration": 10
+    },
+    {
+      "scene_id": 5,
+      "script": "Build a state diagram to depict all possible conditions of the system as it processes inputs.",
+      "visual_description": "Animated state diagram illustrating transitions between different states of the system, each clearly labeled.",
+      "duration": 10
+    },
+    {
+      "scene_id": 6,
+      "script": "Finally, review your model for accuracy. Ensure it consistently represents both active and passive states of objects.",
+      "visual_description": "A checklist being marked off with a visual representation of both active and passive states of an object.",
+      "duration": 10
+    }
+  ]
+}
