@@ -142,7 +142,13 @@ if uploaded_file:
 
                     scene_files.append(scene_video)
 
+                    # 🔹 Show scene video immediately
+                    st.subheader(f"🎬 Scene {scene_id}")
+                    st.video(scene_video)
+
                 export_final_video(scene_files)
 
             st.success("Video Generated!")
+            st.subheader("🎥 Final Video")
             st.video("final_video.mp4")
+
