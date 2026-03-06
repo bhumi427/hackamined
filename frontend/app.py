@@ -1,66 +1,3 @@
-# import streamlit as st
-# import sys
-# import os
-# import json
-
-# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-# from backend.parser import extract_text
-# from backend.script_agent import generate_script
-# from backend.image_generator import get_scene_image
-
-# st.set_page_config(page_title="Agentic Video Editor", layout="wide")
-
-# st.title("🎬 Agentic Video Editor")
-# st.write("Upload a document to generate a storyboard.")
-
-# uploaded_file = st.file_uploader("Upload PDF", type=["pdf"])
-
-
-# if uploaded_file:
-
-#     text = extract_text(uploaded_file)
-
-#     if st.button("Generate Script"):
-
-#         response = generate_script(text)
-
-#         try:
-#             data = json.loads(response)
-
-#             scenes = data["scenes"]
-
-#             st.success(f"Generated {len(scenes)} scenes")
-
-#             scene_titles = [f"Scene {s['scene_id']}" for s in scenes]
-
-#             tabs = st.tabs(scene_titles)
-
-#             for i, tab in enumerate(tabs):
-
-#                 scene = scenes[i]
-
-#                 with tab:
-#                     image_url = get_scene_image(scene["visual_description"])
-
-#                     st.image(image_url)
-
-#                     col1, col2 = st.columns(2)
-
-#                     with col1:
-#                         st.subheader("🎙 Script")
-#                         st.write(scene["script"])
-
-#                     with col2:
-#                         st.subheader("🎥 Visual Description")
-#                         st.write(scene["visual_description"])
-
-#                     st.write("⏱ Duration:", scene["duration"], "seconds")
-
-#         except:
-#             st.error("Failed to parse JSON response")
-#             st.write(response)
-
 
 import streamlit as st
 import sys
@@ -90,7 +27,7 @@ st.set_page_config(page_title="Agentic Video Editor", layout="wide")
 
 st.title("🎬 Agentic Video Editor")
 
-CACHE_FILE = "scenes.json"  # stores a dict mapping filename->scene data
+CACHE_FILE = "server.json"  # stores a dict mapping filename->scene data
 
 uploaded_file = st.file_uploader("Upload Document", type=["pdf"])
 
@@ -105,13 +42,29 @@ if uploaded_file:
     # if a new file is uploaded, delete any previous cache so we don't show
     # the old scenes
     if uploaded_file.name != st.session_state.last_file:
+
         st.session_state.last_file = uploaded_file.name
+
+        # Clear script + visual widget states
+        for key in list(st.session_state.keys()):
+            if "_script_" in key or "_visual_" in key:
+                del st.session_state[key]
+
+        # Clear cached scenes
+        if "scenes_data" in st.session_state:
+            del st.session_state["scenes_data"]
+
+        # Clear generated images
+        for key in list(st.session_state.keys()):
+            if key.startswith("scene_img_"):
+                del st.session_state[key]
+
+        # Remove cache file
         if os.path.exists(CACHE_FILE):
             try:
                 os.remove(CACHE_FILE)
             except Exception:
                 pass
-
     text = extract_text(uploaded_file)
 
     col1, col2 = st.columns(2)
@@ -184,6 +137,15 @@ if uploaded_file:
 
         scenes = data["scenes"]
 
+# Reload scenes if file changed OR scenes not initialized
+        if (
+            "scenes_data" not in st.session_state
+            or st.session_state.last_file != uploaded_file.name
+        ):
+            st.session_state.scenes_data = scenes
+
+        scenes = st.session_state.scenes_data
+
         st.success(f"{len(scenes)} scenes loaded")
 
         scene_titles = [f"Scene {s['scene_id']}" for s in scenes]
@@ -198,12 +160,19 @@ if uploaded_file:
 
                 st.subheader("Visual Options")
 
-                images = get_scene_images(scene["visual_description"])
+                if st.button("Generate Image", key=f"generate_img_{scene['scene_id']}"):
 
-                cols = st.columns(3)
+                    images = get_scene_images(
+                        st.session_state.scenes_data[i]["visual_description"],
+                        scene["scene_id"]
+                    )
 
-                for j, img in enumerate(images):
-                    cols[j].image(img)
+                    st.session_state.scenes_data[i]["image"] = images[0]
+
+                    st.success("Image generated!")
+
+                if "image" in st.session_state.scenes_data[i]:
+                    st.image(st.session_state.scenes_data[i]["image"])
 
                 st.divider()
 
@@ -211,16 +180,45 @@ if uploaded_file:
 
                 with col1:
                     st.subheader("Script")
-                    st.write(scene["script"])
+
+                    script_key = f"{uploaded_file.name}_script_{scene['scene_id']}"
+
+                    script = st.text_area(
+                        "Edit Script",
+                        value=scene["script"],
+                        key=script_key
+                    )
+
+                    st.session_state.scenes_data[i]["script"] = script
 
                 with col2:
                     st.subheader("Visual Description")
-                    st.write(scene["visual_description"])
+
+                    visual_key = f"{uploaded_file.name}_visual_{scene['scene_id']}"
+
+                    visual = st.text_area(
+                        "Edit Visual Description",
+                        value=scene["visual_description"],
+                        key=visual_key
+                    )
+
+                    st.session_state.scenes_data[i]["visual_description"] = visual
+
+                    if st.button("Update Visual From Script", key=f"update_visual_{scene['scene_id']}"):
+
+                        from backend.image_generator import expand_visual_description
+
+                        detailed, _ = expand_visual_description(script)
+
+                        st.session_state.scenes_data[i]["visual_description"] = detailed
+
+                        st.success("Visual description updated from script")
+
 
                 st.subheader("Audio")
 
                 # Audio playback
-                audio_data = generate_audio(scene["script"])
+                audio_data = generate_audio(st.session_state.scenes_data[i]["script"])
                 audio_b64 = base64.b64encode(audio_data).decode()
                 audio_url = f"data:audio/mp3;base64,{audio_b64}"
                 html = f"""

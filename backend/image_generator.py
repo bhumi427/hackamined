@@ -76,8 +76,56 @@ Only output what is asked for; do not include extra explanation.
         print(f"Error expanding description: {e}")
         return short_description, short_description
 
+import base64
 
-def get_scene_images(query, num_images=3):
+HF_API_KEY = os.getenv("HF_API_KEY")
+
+def generate_flux_image(prompt):
+    """
+    Generate an image using HuggingFace FLUX model.
+    Returns a base64 image or saved local path.
+    """
+
+    url = "https://router.huggingface.co/hf-inference/models/black-forest-labs/FLUX.1-schnell"
+
+    headers = {
+        "Authorization": f"Bearer {HF_API_KEY}",
+        "Content-Type": "application/json"
+    }
+
+    payload = {
+        "inputs": prompt
+    }
+
+    response = requests.post(url, headers=headers, json=payload)
+
+    if response.status_code == 200:
+        image_bytes = response.content
+
+        filename = f"flux_scene_{abs(hash(prompt))}.png"
+
+        with open(filename, "wb") as f:
+            f.write(image_bytes)
+
+        return filename
+
+    else:
+        print("FLUX generation failed:", response.text)
+        return None
+
+
+def get_scene_images(query, scene_id, num_images=1):
+    # Use FLUX generation for first two scenes
+    if scene_id in [1, 2]:
+
+        print("Using HuggingFace FLUX generation")
+
+        detailed_query, _ = expand_visual_description(query)
+
+        flux_image = generate_flux_image(detailed_query)
+
+        if flux_image:
+            return [flux_image]
     """
     Fetch images from Pexels API based on expanded visual description.
     Includes better error handling and local fallbacks.

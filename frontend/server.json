@@ -1,0 +1,76 @@
+{
+  "scenes": [
+    {
+      "scene_id": 1,
+      "script": "The explosion of user-generated content on social media has created immense textual data, revealing public sentiments about products and issues.",
+      "visual_description": "Dynamic visuals of social media feeds with comments and reactions.",
+      "duration": 10
+    },
+    {
+      "scene_id": 2,
+      "script": "Analyzing this data helps in making data-driven decisions across various fields like business, healthcare, and politics.",
+      "visual_description": "Infographics showcasing different sectors benefiting from sentiment analysis.",
+      "duration": 10
+    },
+    {
+      "scene_id": 3,
+      "script": "Traditional sentiment analysis techniques faced challenges as they relied heavily on lexicons and rules, missing contextual nuances.",
+      "visual_description": "Visuals depicting traditional analytics methods failing with complex text.",
+      "duration": 10
+    },
+    {
+      "scene_id": 4,
+      "script": "With advancements in machine learning, models like CNNs, LSTMs, and transformers have significantly improved sentiment classification.",
+      "visual_description": "Animation showing the evolution of machine learning models.",
+      "duration": 10
+    },
+    {
+      "scene_id": 5,
+      "script": "However, centralization in data collection raises serious privacy and security concerns.",
+      "visual_description": "Lock and key visuals representing data privacy issues.",
+      "duration": 10
+    },
+    {
+      "scene_id": 6,
+      "script": "Federated Learning addresses these issues by allowing decentralized training while keeping raw data private.",
+      "visual_description": "Illustration of a decentralized network with clients working independently.",
+      "duration": 10
+    },
+    {
+      "scene_id": 7,
+      "script": "While promising, federated learning struggles with variations in data distributions and performance degradation in practical scenarios.",
+      "visual_description": "Graph showing fluctuations in performance metrics.",
+      "duration": 10
+    },
+    {
+      "scene_id": 8,
+      "script": "Agentic AI introduces autonomous decision-making agents, enhancing federated learning through improved client selection and aggregation.",
+      "visual_description": "Robot-like agents coordinating data processing in a network.",
+      "duration": 10
+    },
+    {
+      "scene_id": 9,
+      "script": "Combining Agentic AI with federated learning can create robust sentiment classification frameworks, adapting to diverse client needs.",
+      "visual_description": "Visual representation of a collaborative AI network adapting to changes.",
+      "duration": 10
+    },
+    {
+      "scene_id": 10,
+      "script": "Current frameworks for sentiment analysis must evolve to handle dynamic client conditions effectively.",
+      "visual_description": "Animation of frameworks evolving over time with new features.",
+      "duration": 10
+    },
+    {
+      "scene_id": 11,
+      "script": "This review explores the potential for integrating Agentic AI within federated learning for enhanced privacy-preserving analysis.",
+      "visual_description": "Overview of the research paper with highlighted sections.",
+      "duration": 10
+    },
+    {
+      "scene_id": 12,
+      "script": "Future developments can lead to innovative solutions for real-world sentiment classification challenges, prioritizing user privacy.",
+      "visual_description": "Futuristic imagery of technology protecting user privacy while analyzing data.",
+      "duration": 10
+    }
+  ]
+}
