@@ -1,6 +1,12 @@
 import os
 import requests
-import google.generativeai as genai
+
+# some environments may not have the google generative client installed
+try:
+    import google.generativeai as genai
+except ImportError:
+    genai = None
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -40,13 +46,12 @@ def call_aipipe(prompt):
     
 
 def call_gemini(prompt):
+    if genai is None:
+        raise RuntimeError("google.generativeai package not available")
 
     genai.configure(api_key=GEMINI_KEY)
-
     model = genai.GenerativeModel("gemini-pro")
-
     response = model.generate_content(prompt)
-
     return response.text
 
 
@@ -56,4 +61,4 @@ def generate_text(prompt):
         return call_aipipe(prompt)
 
     elif provider == "gemini":
-        return call_gemini(prompt)
+        return call_gemini(prompt)  # may raise if google library missing

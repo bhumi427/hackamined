@@ -90,12 +90,27 @@ st.set_page_config(page_title="Agentic Video Editor", layout="wide")
 
 st.title("🎬 Agentic Video Editor")
 
-CACHE_FILE = "scenes.json"
+CACHE_FILE = "scenes.json"  # stores a dict mapping filename->scene data
 
 uploaded_file = st.file_uploader("Upload Document", type=["pdf"])
 
+# remember the last uploaded filename so we can detect when the user
+# switches to a different PDF and clear the cache accordingly.
+if 'last_file' not in st.session_state:
+    st.session_state.last_file = None
+
 
 if uploaded_file:
+
+    # if a new file is uploaded, delete any previous cache so we don't show
+    # the old scenes
+    if uploaded_file.name != st.session_state.last_file:
+        st.session_state.last_file = uploaded_file.name
+        if os.path.exists(CACHE_FILE):
+            try:
+                os.remove(CACHE_FILE)
+            except Exception:
+                pass
 
     text = extract_text(uploaded_file)
 
@@ -109,28 +124,60 @@ if uploaded_file:
 
     data = None
 
-    # Load cached scenes
-    if os.path.exists(CACHE_FILE) and not regenerate_btn:
+    # Handle Generate Scenes button - only load from server.json, no API call
+    if generate_btn:
+        if os.path.exists("server.json"):
+            try:
+                with open("server.json") as f:
+                    data = json.load(f)
+                st.success("Scenes loaded from server.json")
+            except Exception:
+                st.error("Failed to load scenes from server.json")
+        else:
+            st.warning("No scenes found in server.json. Use 'Regenerate Scenes' to generate new content.")
 
-        with open(CACHE_FILE) as f:
-            data = json.load(f)
-
-    # Generate scenes
-    if generate_btn or regenerate_btn:
-
-        script = generate_script(text)
-
+    # Handle Regenerate Scenes button - call API and save to server.json
+    elif regenerate_btn:
+        with st.spinner("Regenerating scenes..."):
+            script = generate_script(text)
         try:
-
             data = json.loads(script)
-
-            with open(CACHE_FILE, "w") as f:
+            with open("server.json", "w") as f:
                 json.dump(data, f, indent=2)
+            st.success("Scenes regenerated and saved to server.json!")
+        except Exception:
+            # clean up any markdown formatting from the LLM response
+            cleaned_script = script.strip()
+            if cleaned_script.startswith('```json'):
+                cleaned_script = cleaned_script[7:]
+            if cleaned_script.startswith('```'):
+                cleaned_script = cleaned_script[3:]
+            if cleaned_script.endswith('```'):
+                cleaned_script = cleaned_script[:-3]
+            cleaned_script = cleaned_script.strip()
+            
+            # try parsing the cleaned version
+            try:
+                data = json.loads(cleaned_script)
+                with open("server.json", "w") as f:
+                    json.dump(data, f, indent=2)
+                st.success("Scenes regenerated and saved to server.json!")
+            except Exception:
+                # save raw cleaned output to server.json
+                try:
+                    with open("server.json", "w") as sf:
+                        sf.write(cleaned_script)
+                    st.info("Raw LLM output saved to server.json")
+                except Exception as _:
+                    pass
 
-        except:
-
-            st.error("Failed to parse LLM JSON response")
-            st.write(script)
+    # If no button pressed and we have cached data, load it
+    elif os.path.exists("server.json"):
+        try:
+            with open("server.json") as f:
+                data = json.load(f)
+        except Exception:
+            pass
 
     # Display scenes
     if data:

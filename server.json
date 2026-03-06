@@ -1,0 +1,76 @@
+{
+  "scenes": [
+    {
+      "scene_id": 1,
+      "script": "On a sunny morning, a creeping vine moves toward my Grandfather's feet, bringing warmth to our moment together.",
+      "visual_description": "A serene North Indian winter morning with a creeping vine slowly moving across a veranda towards an elderly man.",
+      "duration": 10
+    },
+    {
+      "scene_id": 2,
+      "script": "Grandfather's love for trees shines through as he speaks about their significance and beauty.",
+      "visual_description": "An animated image of Grandfather with trees around him, shining under soft sunlight.",
+      "duration": 10
+    },
+    {
+      "scene_id": 3,
+      "script": "He built a home in Dehradun, surrounded by lime, mango, orange, and guava trees.",
+      "visual_description": "A picturesque bungalow surrounded by lush greenery and various fruit trees.",
+      "duration": 10
+    },
+    {
+      "scene_id": 4,
+      "script": "The peepul tree stands proudly, despite Grandmother\u2019s wish to cut it down, showcasing nature's resilience.",
+      "visual_description": "A strong old peepul tree next to a house, leaves twirling in the breeze.",
+      "duration": 10
+    },
+    {
+      "scene_id": 5,
+      "script": "Grandfather helps Grandmother with her garden, knowing that flowers attract butterflies.",
+      "visual_description": "Grandfather and Grandmother happily tending to a colorful flower garden filled with butterflies.",
+      "duration": 10
+    },
+    {
+      "scene_id": 6,
+      "script": "Together, we plant trees in the forest for the animals and the environment, beyond just beauty.",
+      "visual_description": "Grandfather and a child planting saplings in a lush forest, surrounded by diverse wildlife.",
+      "duration": 10
+    },
+    {
+      "scene_id": 7,
+      "script": "Grandfather warns that if we don\u2019t plant trees, deserts will take over the world.",
+      "visual_description": "An animated depiction of a looming desert over a barren landscape contrasting with green forests.",
+      "duration": 10
+    },
+    {
+      "scene_id": 8,
+      "script": "Inspired by his wisdom, I eagerly join him in tree planting, learning about nature's importance.",
+      "visual_description": "A young child enthusiastically planting trees under Grandfather's guidance, smiling and engaged.",
+      "duration": 10
+    },
+    {
+      "scene_id": 9,
+      "script": "Grandfather shares a tale: trees could once walk, but now they are rooted in one place.",
+      "visual_description": "An illustration of animated trees with human-like features walking in a mystical forest.",
+      "duration": 10
+    },
+    {
+      "scene_id": 10,
+      "script": "On a small island, we plant more trees, hoping to bring life to barren lands.",
+      "visual_description": "A small rocky island in a riverbed, with Grandfather and child planting saplings with enthusiasm.",
+      "duration": 10
+    },
+    {
+      "scene_id": 11,
+      "script": "With the arrival of the rains, life bursts forth, revealing the magic of nature\u2019s revival.",
+      "visual_description": "Timelapse of rain bringing greenery, flowers blooming, and trees bursting with life.",
+      "duration": 10
+    },
+    {
+      "scene_id": 12,
+      "script": "As the world changes, our love for trees remains, reminding us to protect nature for future generations.",
+      "visual_description": "A heartfelt scene showing the child remembering Grandfather while planting a tree, symbolizing continuity.",
+      "duration": 10
+    }
+  ]
+}
