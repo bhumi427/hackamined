@@ -2,74 +2,74 @@
   "scenes": [
     {
       "scene_id": 1,
-      "script": "On a sunny morning, a creeping vine moves toward my Grandfather's feet, bringing warmth to our moment together.",
-      "visual_description": "A serene North Indian winter morning with a creeping vine slowly moving across a veranda towards an elderly man.",
+      "script": "On a warm morning, I sat with Grandfather on the veranda, observing a creeping vine approaching him. It felt like it wanted to be close.",
+      "visual_description": "A sunny veranda with a grandfather figure sitting on steps, a creeping vine moving towards him.",
       "duration": 10
     },
     {
       "scene_id": 2,
-      "script": "Grandfather's love for trees shines through as he speaks about their significance and beauty.",
-      "visual_description": "An animated image of Grandfather with trees around him, shining under soft sunlight.",
+      "script": "Grandfather�s presence made the garden feel happy and alive. He had a special connection with nature and loved trees.",
+      "visual_description": "The garden fills with vibrant colors as Grandfather smiles, surrounded by various trees.",
       "duration": 10
     },
     {
       "scene_id": 3,
-      "script": "He built a home in Dehradun, surrounded by lime, mango, orange, and guava trees.",
-      "visual_description": "A picturesque bungalow surrounded by lush greenery and various fruit trees.",
+      "script": "After retiring, Grandfather planted many trees around his new home: lime, mango, orange, and exotic varieties.",
+      "visual_description": "A montage of different trees being planted by Grandfather in a lush green setting.",
       "duration": 10
     },
     {
       "scene_id": 4,
-      "script": "The peepul tree stands proudly, despite Grandmother\u2019s wish to cut it down, showcasing nature's resilience.",
-      "visual_description": "A strong old peepul tree next to a house, leaves twirling in the breeze.",
+      "script": "The old peepul tree, strong and bold, added character to the garden, much to Grandmother�s dismay.",
+      "visual_description": "The majestic peepul tree swaying in a gentle breeze, while an annoyed grandmother looks on.",
       "duration": 10
     },
     {
       "scene_id": 5,
-      "script": "Grandfather helps Grandmother with her garden, knowing that flowers attract butterflies.",
-      "visual_description": "Grandfather and Grandmother happily tending to a colorful flower garden filled with butterflies.",
+      "script": "Grandmother loved flowers and constantly ordered seeds, with Grandfather assisting to attract butterflies.",
+      "visual_description": "Grandmother examining flower catalogues, while colorful butterflies flutter around freshly bloomed flowers.",
       "duration": 10
     },
     {
       "scene_id": 6,
-      "script": "Together, we plant trees in the forest for the animals and the environment, beyond just beauty.",
-      "visual_description": "Grandfather and a child planting saplings in a lush forest, surrounded by diverse wildlife.",
+      "script": "Together, they ventured beyond the garden, planting trees in the nearby jungle� not for views, but for the ecosystem.",
+      "visual_description": "Grandfather and the narrator planting saplings in a forested area, showing the connection to nature.",
       "duration": 10
     },
     {
       "scene_id": 7,
-      "script": "Grandfather warns that if we don\u2019t plant trees, deserts will take over the world.",
-      "visual_description": "An animated depiction of a looming desert over a barren landscape contrasting with green forests.",
+      "script": "Grandfather taught the importance of trees�not just for humans but for all creatures depending on them.",
+      "visual_description": "A visual showing various animals and birds in a thriving forest to illustrate interdependence.",
       "duration": 10
     },
     {
       "scene_id": 8,
-      "script": "Inspired by his wisdom, I eagerly join him in tree planting, learning about nature's importance.",
-      "visual_description": "A young child enthusiastically planting trees under Grandfather's guidance, smiling and engaged.",
+      "script": "He worried about deforestation, reminding me that if too many trees were lost, deserts could emerge.",
+      "visual_description": "A stark contrast between a lush forest and a barren desert, highlighting the importance of trees.",
       "duration": 10
     },
     {
       "scene_id": 9,
-      "script": "Grandfather shares a tale: trees could once walk, but now they are rooted in one place.",
-      "visual_description": "An illustration of animated trees with human-like features walking in a mystical forest.",
+      "script": "As we planted trees, Grandfather shared a poem, emphasizing our responsibility to protect nature.",
+      "visual_description": "Grandfather reading the poem as they plant small saplings, with a serene, woodland backdrop.",
       "duration": 10
     },
     {
       "scene_id": 10,
-      "script": "On a small island, we plant more trees, hoping to bring life to barren lands.",
-      "visual_description": "A small rocky island in a riverbed, with Grandfather and child planting saplings with enthusiasm.",
+      "script": "He spoke of a mythical time when trees could walk, reminding me of their innate desire to thrive.",
+      "visual_description": "Ancient, mythical trees depicted walking in a whimsical animated sequence, motioning joyfully.",
       "duration": 10
     },
     {
       "scene_id": 11,
-      "script": "With the arrival of the rains, life bursts forth, revealing the magic of nature\u2019s revival.",
-      "visual_description": "Timelapse of rain bringing greenery, flowers blooming, and trees bursting with life.",
+      "script": "We discovered a dry river-bed and planted more saplings, hopeful that the rains would bring them life.",
+      "visual_description": "Exploring a dry river-bed, digging and planting saplings, with the sun shining overhead.",
       "duration": 10
     },
     {
       "scene_id": 12,
-      "script": "As the world changes, our love for trees remains, reminding us to protect nature for future generations.",
-      "visual_description": "A heartfelt scene showing the child remembering Grandfather while planting a tree, symbolizing continuity.",
+      "script": "Life flourished with the rains, plants sprouted in unexpected places, showcasing nature's resilience.",
+      "visual_description": "Lush greenery emerging in various locations, capturing the excitement of growth after rain.",
       "duration": 10
     }
   ]

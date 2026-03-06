@@ -1,4 +1,10 @@
+import os
 import requests
+from urllib.parse import quote_plus
+from dotenv import load_dotenv
+
+# ensure environment variables are loaded
+load_dotenv()
 
 # delay import of LLM helper to avoid module errors in environments without dependencies
 try:
@@ -88,11 +94,15 @@ def get_scene_images(query, num_images=3):
     clean_query = keyword_query if keyword_query else detailed_query
     clean_query = clean_query.strip()
 
-    # Use Pexels API with your key
+    # Use Pexels API with your key from env
     try:
-        pexels_api_key = "-69wYttLk42fc3g8TFvfng9q9tr1p4dRjS8pGZS1ZLawrBLqIlnZ253Po"
+        pexels_api_key = os.getenv("PEXELS_API_KEY")
+        if not pexels_api_key:
+            raise RuntimeError("PEXELS_API_KEY not set in environment")
         headers = {"Authorization": pexels_api_key}
-        search_url = f"https://api.pexels.com/v1/search?query={clean_query}&per_page={num_images}&orientation=landscape"
+        # URL-encode query to avoid invalid characters
+        encoded = quote_plus(clean_query)
+        search_url = f"https://api.pexels.com/v1/search?query={encoded}&per_page={num_images}&orientation=landscape"
         print(f"Trying Pexels API: {search_url}")
         response = requests.get(search_url, headers=headers, timeout=15)
 
@@ -103,7 +113,7 @@ def get_scene_images(query, num_images=3):
 
             if photos:
                 images = [photo['src']['large'] for photo in photos[:num_images]]
-                print("✅ Using Pexels images")
+                print("Using Pexels images")
                 return images
         else:
             print(f"Pexels API error: {response.status_code} - {response.text}")
@@ -114,10 +124,11 @@ def get_scene_images(query, num_images=3):
     # Fallback: Use Unsplash with expanded description
     try:
         print("Trying Unsplash fallback...")
+        encoded_uns = quote_plus(clean_query.replace(' ', ','))
         for i in range(num_images):
-            url = f"https://source.unsplash.com/featured/800/450/?{clean_query.replace(' ', ',')}"
+            url = f"https://source.unsplash.com/featured/800/450/?{encoded_uns}"
             images.append(url)
-        print("✅ Using Unsplash images")
+        print("Using Unsplash images")
         return images
     except Exception as e:
         print(f"Unsplash fallback failed: {e}")
@@ -135,5 +146,5 @@ def get_scene_images(query, num_images=3):
     for i in range(num_images):
         images.append(fallback_urls[i % len(fallback_urls)])
 
-    print("✅ Using Lorem Picsum fallback images")
+    print("Using Lorem Picsum fallback images")
     return images
