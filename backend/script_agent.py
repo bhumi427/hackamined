@@ -1,8 +1,23 @@
 from backend.llm_wrapper import generate_text
 
 
+def generate_summary(text):
+    prompt = f"""
+You are an expert at summarizing documents for educational videos.
+
+Please provide a comprehensive but concise overall summary of the following document.
+Focus on the most important ideas that should be covered in a short educational video. 
+Make sure the flow is logical and clear.
+
+Document:
+{text[:10000]}
+"""
+    return generate_text(prompt)
+
+
 def generate_script(text):
 
+    # For the script length calculation, we use the length of the summary
     word_count = len(text.split())
 
     # Estimate video length based on document size

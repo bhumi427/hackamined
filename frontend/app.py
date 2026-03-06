@@ -74,7 +74,7 @@ import streamlit.components.v1 as components
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from backend.parser import extract_text
-from backend.script_agent import generate_script
+from backend.script_agent import generate_script, generate_summary
 from backend.image_generator import get_scene_images
 
 
@@ -102,34 +102,135 @@ if 'last_file' not in st.session_state:
 
 if uploaded_file:
 
+    if 'summary' not in st.session_state:
+        st.session_state.summary = None
+    if 'scenes_visible' not in st.session_state:
+        st.session_state.scenes_visible = False
+
     # if a new file is uploaded, delete any previous cache so we don't show
     # the old scenes
     if uploaded_file.name != st.session_state.last_file:
         st.session_state.last_file = uploaded_file.name
-        if os.path.exists(CACHE_FILE):
-            try:
-                os.remove(CACHE_FILE)
-            except Exception:
-                pass
+        for f_name in [CACHE_FILE, "server.json", "summary.txt"]:
+            if os.path.exists(f_name):
+                try:
+                    os.remove(f_name)
+                except Exception:
+                    pass
+        st.session_state.summary = None
+        st.session_state.scenes_visible = False
+        st.rerun()
 
     text = extract_text(uploaded_file)
+    
+    # Load summary if missing from session state but file exists
+    if st.session_state.summary is None and os.path.exists("summary.txt"):
+        try:
+            with open("summary.txt", "r") as f:
+                st.session_state.summary = f.read()
+        except:
+            pass
 
-    col1, col2 = st.columns(2)
+    st.subheader("Step 1: Review Summary")
+    
+    if st.session_state.summary is None:
+        if st.button("Generate Summary"):
+            if os.path.exists("summary.txt"):
+                try:
+                    with open("summary.txt", "r") as f:
+                        st.session_state.summary = f.read()
+                    st.success("Loaded existing summary from file!")
+                    import time
+                    time.sleep(1)
+                    st.rerun()
+                except Exception:
+                    pass
 
-    with col1:
-        generate_btn = st.button("Generate Scenes")
+            if st.session_state.summary is None:
+                with st.spinner("Generating summary..."):
+                    summary = generate_summary(text)
+                    st.session_state.summary = summary
+                    try:
+                        with open("summary.txt", "w") as f:
+                            f.write(summary)
+                    except Exception:
+                        pass
+                with st.spinner("Generating scenes..."):
+                    script = generate_script(summary)
+                    try:
+                        data = json.loads(script)
+                        with open("server.json", "w") as f:
+                            json.dump(data, f, indent=2)
+                        st.success("Scenes generated and saved to server.json!")
+                    except Exception:
+                        cleaned_script = script.strip()
+                        if cleaned_script.startswith('```json'):
+                            cleaned_script = cleaned_script[7:]
+                        if cleaned_script.startswith('```'):
+                            cleaned_script = cleaned_script[3:]
+                        if cleaned_script.endswith('```'):
+                            cleaned_script = cleaned_script[:-3]
+                        cleaned_script = cleaned_script.strip()
+                        try:
+                            data = json.loads(cleaned_script)
+                            with open("server.json", "w") as f:
+                                json.dump(data, f, indent=2)
+                            st.success("Scenes generated and saved to server.json!")
+                        except Exception:
+                            try:
+                                with open("server.json", "w") as sf:
+                                    sf.write(cleaned_script)
+                                st.info("Raw LLM output saved to server.json")
+                            except Exception as _:
+                                pass
+                    st.rerun()
+                
+        # Stop execution here until summary is generated
+        st.stop()
+    else:
+        st.session_state.summary = st.text_area(
+            "Overall Summary (Edit if needed):", 
+            value=st.session_state.summary, 
+            height=250
+        )
+        
+        try:
+            with open("summary.txt", "w") as f:
+                f.write(st.session_state.summary)
+        except Exception:
+            pass
 
-    with col2:
-        regenerate_btn = st.button("Regenerate Scenes")
+        st.subheader("Step 2: Generate Scenes")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            generate_btn = st.button("Load Scenes from Cache")
+
+        with col2:
+            regenerate_btn = st.button("Regenerate Scenes")
 
     data = None
 
-    # Handle Generate Scenes button - only load from server.json, no API call
+    # Only load data if scenes_visible flag is set (user explicitly loaded/generated)
+    if st.session_state.scenes_visible and os.path.exists("server.json"):
+        try:
+            with open("server.json") as f:
+                data = json.load(f)
+        except Exception:
+            pass
+
+    # Handle Load Scenes button - only load from server.json, no API call
     if generate_btn:
         if os.path.exists("server.json"):
             try:
                 with open("server.json") as f:
                     data = json.load(f)
+                # Clear stale visual description backing values from previous file
+                for key in list(st.session_state.keys()):
+                    if key.startswith("vis_val_"):
+                        del st.session_state[key]
+                st.session_state.scenes_visible = True
                 st.success("Scenes loaded from server.json")
             except Exception:
                 st.error("Failed to load scenes from server.json")
@@ -137,17 +238,30 @@ if uploaded_file:
             st.warning("No scenes found in server.json. Use 'Regenerate Scenes' to generate new content.")
 
     # Handle Regenerate Scenes button - call API and save to server.json
-    elif regenerate_btn:
-        with st.spinner("Regenerating scenes..."):
-            script = generate_script(text)
+    if regenerate_btn:
+        if os.path.exists("server.json"):
+            try:
+                os.remove("server.json")
+            except Exception:
+                pass
+
+        with st.spinner("Generating scenes from summary..."):
+            script = generate_script(st.session_state.summary)
         try:
             data = json.loads(script)
             with open("server.json", "w") as f:
                 json.dump(data, f, indent=2)
+            # Clear stale visual description backing values from previous file
+            for key in list(st.session_state.keys()):
+                if key.startswith("vis_val_"):
+                    del st.session_state[key]
+            st.session_state.scenes_visible = True
             st.success("Scenes regenerated and saved to server.json!")
         except Exception:
             # clean up any markdown formatting from the LLM response
             cleaned_script = script.strip()
+            if cleaned_script.startswith('```json'):
+                cleaned_script = cleaned_script[7:]
             if cleaned_script.startswith('```json'):
                 cleaned_script = cleaned_script[7:]
             if cleaned_script.startswith('```'):
@@ -171,20 +285,13 @@ if uploaded_file:
                 except Exception as _:
                     pass
 
-    # If no button pressed and we have cached data, load it
-    elif os.path.exists("server.json"):
-        try:
-            with open("server.json") as f:
-                data = json.load(f)
-        except Exception:
-            pass
-
     # Display scenes
     if data:
 
         scenes = data["scenes"]
 
         st.success(f"{len(scenes)} scenes loaded")
+
 
         scene_titles = [f"Scene {s['scene_id']}" for s in scenes]
 
@@ -196,31 +303,90 @@ if uploaded_file:
 
             with tab:
 
-                st.subheader("Visual Options")
-
-                images = get_scene_images(scene["visual_description"])
-
-                cols = st.columns(3)
-
-                for j, img in enumerate(images):
-                    cols[j].image(img)
-
-                st.divider()
-
+                # Script and Visual Description side by side
                 col1, col2 = st.columns(2)
 
                 with col1:
                     st.subheader("Script")
-                    st.write(scene["script"])
+                    # Make script editable
+                    edited_script = st.text_area(
+                        "Edit script:",
+                        value=scene["script"],
+                        height=150,
+                        key=f"script_{scene['scene_id']}",
+                        label_visibility="collapsed"
+                    )
 
                 with col2:
                     st.subheader("Visual Description")
-                    st.write(scene["visual_description"])
+                    # Backing key: updated by generate button, read as value every rerun
+                    vis_val_key = f"vis_val_{scene['scene_id']}"
+                    if vis_val_key not in st.session_state:
+                        st.session_state[vis_val_key] = scene["visual_description"]
+                    # No widget key — so value= always reflects the backing store
+                    edited_visual = st.text_area(
+                        "Edit visual description:",
+                        value=st.session_state[vis_val_key],
+                        height=150,
+                        label_visibility="collapsed"
+                    )
 
+                col_btn1, col_btn2 = st.columns(2)
+
+                with col_btn1:
+                    # Button to generate visual description from the current script
+                    if st.button(f"Generate Visual Desc from Script (Scene {scene['scene_id']})", key=f"update_{scene['scene_id']}"):
+                        with st.spinner("Generating visual description..."):
+                            from backend.llm_wrapper import generate_text
+                            prompt = f"""
+You are an expert at creating visual descriptions for video scenes.
+
+Based on this script: "{edited_script}"
+
+Create a detailed visual description (2-3 sentences) that would work well for a video scene. Focus on what should be shown visually to match the script content.
+
+Return only the visual description, nothing else.
+"""
+                            try:
+                                new_visual_desc = generate_text(prompt).strip()
+                                if new_visual_desc:
+                                    data["scenes"][i]["script"] = edited_script
+                                    data["scenes"][i]["visual_description"] = new_visual_desc
+                                    with open("server.json", "w") as f:
+                                        json.dump(data, f, indent=2)
+                                    # Update the backing key — safe since it's not a widget key
+                                    st.session_state[vis_val_key] = new_visual_desc
+                                    st.success(f"Scene {scene['scene_id']} visual description updated!")
+                                    st.rerun()
+                            except Exception as e:
+                                st.error(f"Failed to generate visual description: {e}")
+
+                with col_btn2:
+                    if st.button(f"Save Manual Edits (Scene {scene['scene_id']})", key=f"save_{scene['scene_id']}"):
+                        data["scenes"][i]["script"] = edited_script
+                        data["scenes"][i]["visual_description"] = edited_visual
+                        with open("server.json", "w") as f:
+                            json.dump(data, f, indent=2)
+                        st.success(f"Scene {scene['scene_id']} saved!")
+
+                # Generate images on demand
+                if st.button(f"Generate Images (Scene {scene['scene_id']})", key=f"gen_img_{scene['scene_id']}"):
+                    with st.spinner("Generating images..."):
+                        images = get_scene_images(edited_visual)
+                        st.session_state[f"images_{scene['scene_id']}"] = images
+                        st.success("Images generated!")
+
+                # Display images if generated
+                if f"images_{scene['scene_id']}" in st.session_state:
+                    st.subheader("Visual Options")
+                    images = st.session_state[f"images_{scene['scene_id']}"]
+                    cols = st.columns(3)
+                    for j, img in enumerate(images):
+                        cols[j].image(img)
+
+                # Audio
                 st.subheader("Audio")
-
-                # Audio playback
-                audio_data = generate_audio(scene["script"])
+                audio_data = generate_audio(edited_script)
                 audio_b64 = base64.b64encode(audio_data).decode()
                 audio_url = f"data:audio/mp3;base64,{audio_b64}"
                 html = f"""
