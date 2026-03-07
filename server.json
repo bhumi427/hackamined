@@ -2,38 +2,38 @@
   "scenes": [
     {
       "scene_id": 1,
-      "script": "In the story 'When the Trees Walked,' we follow a speaker reminiscing about their Grandfather's love for nature in Dehradun's winter.",
-      "visual_description": "A serene winter landscape of Dehradun with trees covered in frost, showing the speaker observing a vine moving towards a gentle old man.",
+      "script": "On a serene winter morning in North India, a speaker reflects with their Grandfather. A creeping vine captures their attention, symbolizing nature's quiet presence.",
+      "visual_description": "In the foreground, a vibrant red ball sits on a lush green lawn, glistening under the warm sun. In the background, a sleek blue sports car is parked on a winding road, its polished surface reflecting the clear blue sky and fluffy white clouds above.",
       "duration": 10
     },
     {
       "scene_id": 2,
-      "script": "Grandfather, a former forest service member, nurtures a beautiful garden while Grandmother prefers flowers, showcasing their harmonious gardening balance.",
-      "visual_description": "A vibrant garden scene featuring a variety of trees and flowers, with Grandfather tending to the trees and Grandmother caring for the flowers.this must be night scene",
+      "script": "The Grandfather, a former forest officer, proudly cultivates a diverse garden. Fruit trees and ornamental plants flourish around their home in Dehradun.",
+      "visual_description": "A vibrant garden filled with various trees and plants, showcasing colorful fruits and flowers, with an older man tending to the plants.",
       "duration": 10
     },
     {
       "scene_id": 3,
-      "script": "He teaches the speaker that trees are vital for beauty and ecology, preventing desertification and providing wildlife habitats.",
-      "visual_description": "Visuals of diverse trees in a lush environment, transitioning to scenes of desertification and wildlife, highlighting the importance of trees.",
+      "script": "While Grandfather cherishes trees for their beauty and ecological role, Grandmother nurtures flowers to attract butterflies, merging their passions for nature.",
+      "visual_description": "Split-screen visuals of Grandfather caring for trees and Grandmother tending to flowering plants, with butterflies fluttering around.",
       "duration": 10
     },
     {
       "scene_id": 4,
-      "script": "Together, they embark on tree-planting adventures, a symbol of how trees once roamed freely but now need our care.",
-      "visual_description": "The speaker and Grandfather joyfully planting trees in a jungle, surrounded by playful imagery of trees moving through the forest.",
+      "script": "Grandfather shares a whimsical thought: trees once walked but were enchanted to remain still. He urges planting to prevent desertification.",
+      "visual_description": "An imaginative drawing of trees walking, transitioning to a serious Grandfather emphasizing the importance of planting trees amid a deforested landscape.",
       "duration": 10
     },
     {
       "scene_id": 5,
-      "script": "Years later, after the separation from war, the speaker returns to find a once-dry riverbed transformed into a lush paradise.",
-      "visual_description": "A contrasting scene showing the speaker's emotional reaction upon seeing the revitalized green landscape and thriving wildlife.",
+      "script": "The speaker recalls life changes due to World War II, including moving away for school, leaving behind cherished memories of his Grandfather.",
+      "visual_description": "A nostalgic scene depicting an old photograph of the speaker with their Grandfather merging into visuals of a school and travel away from home.",
       "duration": 10
     },
     {
       "scene_id": 6,
-      "script": "The story concludes with hope as Grandfather's dream of nurturing nature is realized, reminding us of our duty to the environment.",
-      "visual_description": "A beautiful, thriving landscape filled with trees, wildlife, and a sense of harmony, symbolizing hope and transformation.",
+      "script": "Years later, returning to Dehradun, the speaker marvels at the flourishing trees they planted together, symbolizing Grandfather's dream of a thriving environment.",
+      "visual_description": "A vibrant landscape of a thriving forest with the speaker walking through lush trees, smiling and reminiscing about their Grandfather's legacy.",
       "duration": 10
     }
   ]
