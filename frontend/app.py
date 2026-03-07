@@ -166,7 +166,7 @@ if uploaded_file:
                     f.write(summary)
 
             with st.spinner("Generating scenes..."):
-                script = generate_script(summary)
+                script = generate_script(text)  # <-- text extracted from PDF
                 try:
                     data = json.loads(script)
                     with open("server.json", "w") as f:
@@ -242,6 +242,7 @@ if uploaded_file:
                         key=f"script_{scene['scene_id']}",
                         label_visibility="collapsed"
                     )
+                    st.caption(f"Reference snippet: {scene.get('source_text', 'N/A')}")
                 with col2:
                     st.subheader("Visual Description")
                     vis_val_key = f"vis_val_{scene['scene_id']}"
@@ -253,7 +254,7 @@ if uploaded_file:
                         height=150,
                         label_visibility="collapsed"
                     )
-
+                    
                 col_btn1, col_btn2 = st.columns(2)
                 with col_btn1:
                     if st.button(f"Generate Visual Desc (Scene {scene['scene_id']})", key=f"update_{scene['scene_id']}"):
@@ -291,7 +292,8 @@ Return 2 sentences describing what should appear in the scene.
                 if f"images_{scene['scene_id']}" in st.session_state:
                     st.subheader("Visual Preview")
                     images = st.session_state[f"images_{scene['scene_id']}"]
-                    st.image(images[0], use_container_width=True)
+                    # st.image(images[0], use_container_width=True)
+                    st.image(images[0], width=700)  # fixed width, maintains aspect ratio
 
                 # Audio preview
                 st.subheader("Audio")
@@ -318,7 +320,7 @@ Return 2 sentences describing what should appear in the scene.
                             scene_video_file = f"scene_{scene['scene_id']}.mp4"
                             create_scene_video(images, audio_file, scene_video_file)
                             st.success(f"Scene {scene['scene_id']} video created!")
-                            st.video(scene_video_file)
+                            st.video(scene_video_file, format="video/mp4", start_time=0, width=700)
 
                     # Cumulative full video up to this scene
                     st.subheader("Full Video up to This Scene")
@@ -354,7 +356,7 @@ Return 2 sentences describing what should appear in the scene.
                                 final_video_file = f"full_video_up_to_scene_{scene['scene_id']}.mp4"
                                 concatenate_videos(scene_videos, final_video_file)
                                 st.success("Full video generated!")
-                                st.video(final_video_file)
+                                st.video(final_video_file, format="video/mp4", start_time=0, width=700)
 
                             # Clean up placeholder videos
                             for s_id in missing_scenes:

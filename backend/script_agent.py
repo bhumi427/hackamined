@@ -55,11 +55,12 @@ The input may be any type of document such as:
 Your job is to convert the content into a clear educational video storyboard.
 
 Rules:
+- Include a field 'source_text' which is a small snippet (first 20–30 words) from the document used to generate this scene.
 - Total number of scenes: {num_scenes}
 - Each scene duration: {scene_duration} seconds
 - Each narration should be about 20–30 words
 - Scenes should summarize the most important ideas from the document
-- Make the explanation simple and clear
+- For traceability, include a "source_text" field containing 20-30 words **directly from the original document** that were used to generate this scene.
 
 Return ONLY valid JSON in this format:
 
@@ -68,8 +69,9 @@ Return ONLY valid JSON in this format:
   {{
    "scene_id":1,
    "script":"scene narration",
-   "visual_description":"what should appear visually",
-   "duration":{scene_duration}
+   "visual_description":"what appears visually",
+   "duration":{scene_duration},
+   "source_text":"exact snippet from original document"
   }}
  ]
 }}

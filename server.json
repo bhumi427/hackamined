@@ -2,39 +2,87 @@
   "scenes": [
     {
       "scene_id": 1,
-      "script": "Nirma University is a distinguished institution in Gujarat, attracting numerous companies seeking talented graduates for employment.",
-      "visual_description": "The scene opens with a bustling campus of Nirma University, showcasing modern architecture, vibrant greenery, and students engaged in discussions, all under a bright blue sky. In the foreground, representatives from various companies are actively interacting with enthusiastic graduates, exchanging ideas and conducting interviews, highlighting the university's reputation as a hub for talent and innovation.",
-      "duration": 10
+      "script": "The story begins with a beautiful morning where the narrator sits with Grandfather. They observe a creeping vine moving towards him.",
+      "visual_description": "A serene morning scene with sunlight filtering through trees, a gentle vine creeping across the steps.",
+      "duration": 10,
+      "source_text": "one morning while I was sitting beside Grandfather on the veranda steps, I noticed the tendril of a creeping vine trailing nearby."
     },
     {
       "scene_id": 2,
-      "script": "A retired Indian Forest Service member, grandpa, inspires a love for nature in the narrator through the diverse plants at their home.",
-      "visual_description": "Footage of a lush garden in Dehradun, with close-ups of trees and flowers, illustrating a family gardening together.",
-      "duration": 10
+      "script": "The narrator enjoys Grandfather\u2019s company, feeling a sense of happiness whenever he is around, contrasting with moments of loneliness.",
+      "visual_description": "The narrator sitting beneath a tree, looking lonely, then brightening as Grandfather joins him.",
+      "duration": 10,
+      "source_text": "One always felt like drawing close to him. Sometimes when I sat by myself beneath a tree, I would feel rather lonely."
     },
     {
       "scene_id": 3,
-      "script": "Grandfather\u2019s passion for trees underscores the importance of restoring forests, highlighting the fight against deforestation and its impact on wildlife.",
-      "visual_description": "Animated infographic depicting forest loss and the benefits of tree planting, with visuals of wildlife and healthy forests.",
-      "duration": 10
+      "script": "Grandfather, a former Indian Forest Service member, creates a home surrounded by various trees, fostering a love for nature.",
+      "visual_description": "A cozy bungalow surrounded by vibrant trees and plants, showcasing the rich foliage of the garden.",
+      "duration": 10,
+      "source_text": "On his retirement, he built a bungalow on the outskirts of Dehradun, planting trees all around."
     },
     {
       "scene_id": 4,
-      "script": "Participating in tree planting rituals, the narrator learns about environmental stewardship and the significance of connecting with nature.",
-      "visual_description": "Scenes of community members planting trees together, reading poems, and discussing the environmental impact.",
-      "duration": 10
+      "script": "Amid the diverse trees, the narrator shares a fond memory of the showy peepul tree that Grandfather refused to cut.",
+      "visual_description": "The majestic peepul tree standing proudly, its leaves spinning in the breeze, while a small outhouse is in the background.",
+      "duration": 10,
+      "source_text": "There was an old peepul that had forced its way through the walls of an abandoned outhouse."
     },
     {
       "scene_id": 5,
-      "script": "After years away for education, the narrator returns to a transformed Dehradun, witnessing thriving ecosystems brought to life by their efforts.",
-      "visual_description": "Contrast of the past and present with visuals of a vibrant green landscape, animals, and flourishing ecosystems.",
-      "duration": 10
+      "script": "Grandmother prefers flowers over trees and often orders seeds, while Grandfather helps her to attract butterflies.",
+      "visual_description": "Grandmother in her garden, surrounded by colorful flowers, with Grandfather watching butterflies flutter around.",
+      "duration": 10,
+      "source_text": "Grandmother didn\u2019t mind trees, but she preferred growing flowers and was constantly ordering catalogues and seeds."
     },
     {
       "scene_id": 6,
-      "script": "The story emphasizes resilience and the legacy of tree planting, showing how individuals can foster a deeper connection with nature.",
-      "visual_description": "A final montage of thriving wildlife and lush greenery, symbolizing hope, continuity, and a harmonious relationship with the environment.",
-      "duration": 10
+      "script": "Grandfather teaches the narrator about the importance of trees beyond just beauty, highlighting their ecological significance.",
+      "visual_description": "Grandfather planting trees in a forest, explaining to the narrator the importance of each sapling for wildlife.",
+      "duration": 10,
+      "source_text": "We\u2019re planting them for the forest and for the animals and birds who live here and need more food and shelter."
+    },
+    {
+      "scene_id": 7,
+      "script": "Concerned about deforestation, Grandfather emphasizes the need for planting trees to prevent ecological disasters.",
+      "visual_description": "A visual of barren land contrasted with lush green forests, illustrating the dangers of cutting down trees.",
+      "duration": 10,
+      "source_text": "if we don\u2019t plant a few trees ourselves, a time will come when the world will be one great desert."
+    },
+    {
+      "scene_id": 8,
+      "script": "Inspired by Grandfather's vision, the narrator eagerly assists in tree-planting, fostering his own love for nature.",
+      "visual_description": "The narrator and Grandfather happily planting small saplings in the ground, surrounded by greenery.",
+      "duration": 10,
+      "source_text": "the thought of a world without trees became a sort of nightmare to me and I helped Grandfather in his tree-planting."
+    },
+    {
+      "scene_id": 9,
+      "script": "Grandfather shares a whimsical tale about trees once moving freely, planting seeds of imagination in the narrator's mind.",
+      "visual_description": "A dreamy visual of trees with legs wandering majestically through landscape, illustrating Grandfather's story.",
+      "duration": 10,
+      "source_text": "One day the trees will move again... they\u2019re always trying to move."
+    },
+    {
+      "scene_id": 10,
+      "script": "During the rains, they find a dry river-bed and plant saplings on a rocky island, nurturing growth in unexpected places.",
+      "visual_description": "The dry river-bed transforming into a vibrant scene with the duo planting saplings amidst lush greenery.",
+      "duration": 10,
+      "source_text": "We found an island, a small rocky island in a dry river-bed."
+    },
+    {
+      "scene_id": 11,
+      "script": "As the monsoons arrive, nature flourishes unexpectedly, demonstrating the resilience and beauty of plant life.",
+      "visual_description": "A vibrant landscape of freshly sprouted plants and vines, showcasing nature's rebirth through the rains.",
+      "duration": 10,
+      "source_text": "the magic touch of the rains had brought life and greenness."
+    },
+    {
+      "scene_id": 12,
+      "script": "With changes in life, the narrator is sent away, marking a bittersweet departure from the cherished memories of his grandparents.",
+      "visual_description": "A nostalgic scene of the narrator looking back at the house and garden, conveying a sense of longing.",
+      "duration": 10,
+      "source_text": "Then came the Second World War and I was sent away to a boarding school."
     }
   ]
 }
