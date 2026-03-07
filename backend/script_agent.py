@@ -1,18 +1,25 @@
 from backend.llm_wrapper import generate_text
 
 
-def generate_summary(text):
-    prompt = f"""
-You are an expert at summarizing documents for educational videos.
+def generate_summary(text, level="Beginner-friendly"):
+    """
+    You are an expert at summarizing documents for educational videos.
 
-Please provide a comprehensive but concise overall summary of the following document.
-Focus on the most important ideas that should be covered in a short educational video. 
-Make sure the flow is logical and clear.
+    Please provide a comprehensive but concise overall summary of the following document.
+    Focus on the most important ideas that should be covered in a short educational video. 
+    Make sure the flow is logical and clear.
+    Generate a summary of the text.
+    level: "Beginner-friendly" or "Expert-level"
+    """
+    if level == "Beginner-friendly":
+        prompt = f"Summarize the following text in simple language suitable for a beginner:\n{text}"
+    else:  # Expert-level
+        prompt = f"Summarize the following text in a detailed, expert-level manner:\n{text}"
 
-Document:
-{text[:10000]}
-"""
-    return generate_text(prompt)
+    # Call your LLM wrapper
+    from backend.llm_wrapper import generate_text
+    summary = generate_text(prompt)
+    return summary
 
 
 def generate_script(text):

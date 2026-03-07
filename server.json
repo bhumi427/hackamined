@@ -2,38 +2,38 @@
   "scenes": [
     {
       "scene_id": 1,
-      "script": "On a serene winter morning in North India, a speaker reflects with their Grandfather. A creeping vine captures their attention, symbolizing nature's quiet presence.",
-      "visual_description": "In the foreground, a vibrant red ball sits on a lush green lawn, glistening under the warm sun. In the background, a sleek blue sports car is parked on a winding road, its polished surface reflecting the clear blue sky and fluffy white clouds above.",
+      "script": "Nirma University is a distinguished institution in Gujarat, attracting numerous companies seeking talented graduates for employment.",
+      "visual_description": "The scene opens with a bustling campus of Nirma University, showcasing modern architecture, vibrant greenery, and students engaged in discussions, all under a bright blue sky. In the foreground, representatives from various companies are actively interacting with enthusiastic graduates, exchanging ideas and conducting interviews, highlighting the university's reputation as a hub for talent and innovation.",
       "duration": 10
     },
     {
       "scene_id": 2,
-      "script": "The Grandfather, a former forest officer, proudly cultivates a diverse garden. Fruit trees and ornamental plants flourish around their home in Dehradun.",
-      "visual_description": "A vibrant garden filled with various trees and plants, showcasing colorful fruits and flowers, with an older man tending to the plants.",
+      "script": "A retired Indian Forest Service member, grandpa, inspires a love for nature in the narrator through the diverse plants at their home.",
+      "visual_description": "Footage of a lush garden in Dehradun, with close-ups of trees and flowers, illustrating a family gardening together.",
       "duration": 10
     },
     {
       "scene_id": 3,
-      "script": "While Grandfather cherishes trees for their beauty and ecological role, Grandmother nurtures flowers to attract butterflies, merging their passions for nature.",
-      "visual_description": "Split-screen visuals of Grandfather caring for trees and Grandmother tending to flowering plants, with butterflies fluttering around.",
+      "script": "Grandfather\u2019s passion for trees underscores the importance of restoring forests, highlighting the fight against deforestation and its impact on wildlife.",
+      "visual_description": "Animated infographic depicting forest loss and the benefits of tree planting, with visuals of wildlife and healthy forests.",
       "duration": 10
     },
     {
       "scene_id": 4,
-      "script": "Grandfather shares a whimsical thought: trees once walked but were enchanted to remain still. He urges planting to prevent desertification.",
-      "visual_description": "An imaginative drawing of trees walking, transitioning to a serious Grandfather emphasizing the importance of planting trees amid a deforested landscape.",
+      "script": "Participating in tree planting rituals, the narrator learns about environmental stewardship and the significance of connecting with nature.",
+      "visual_description": "Scenes of community members planting trees together, reading poems, and discussing the environmental impact.",
       "duration": 10
     },
     {
       "scene_id": 5,
-      "script": "The speaker recalls life changes due to World War II, including moving away for school, leaving behind cherished memories of his Grandfather.",
-      "visual_description": "A nostalgic scene depicting an old photograph of the speaker with their Grandfather merging into visuals of a school and travel away from home.",
+      "script": "After years away for education, the narrator returns to a transformed Dehradun, witnessing thriving ecosystems brought to life by their efforts.",
+      "visual_description": "Contrast of the past and present with visuals of a vibrant green landscape, animals, and flourishing ecosystems.",
       "duration": 10
     },
     {
       "scene_id": 6,
-      "script": "Years later, returning to Dehradun, the speaker marvels at the flourishing trees they planted together, symbolizing Grandfather's dream of a thriving environment.",
-      "visual_description": "A vibrant landscape of a thriving forest with the speaker walking through lush trees, smiling and reminiscing about their Grandfather's legacy.",
+      "script": "The story emphasizes resilience and the legacy of tree planting, showing how individuals can foster a deeper connection with nature.",
+      "visual_description": "A final montage of thriving wildlife and lush greenery, symbolizing hope, continuity, and a harmonious relationship with the environment.",
       "duration": 10
     }
   ]

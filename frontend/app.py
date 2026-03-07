@@ -138,17 +138,20 @@ if uploaded_file:
 
     text = extract_text(uploaded_file)
 
-    if st.session_state.summary is None and os.path.exists("summary.txt"):
-        try:
-            with open("summary.txt") as f:
-                st.session_state.summary = f.read()
-        except:
-            pass
-
+    # ----------------- Step 1: Review Summary -----------------
     st.subheader("Step 1: Review Summary")
 
+    # Ask user for summary level
+    summary_level = st.radio(
+        "Select Summary Level:",
+        ("Beginner-friendly", "Expert-level"),
+        index=0
+    )
+
     if st.session_state.summary is None:
+
         if st.button("Generate Summary"):
+
             if os.path.exists("summary.txt"):
                 with open("summary.txt") as f:
                     st.session_state.summary = f.read()
@@ -156,7 +159,8 @@ if uploaded_file:
                 st.rerun()
 
             with st.spinner("Generating summary..."):
-                summary = generate_summary(text)
+                # Pass level to generate_summary
+                summary = generate_summary(text, level=summary_level)
                 st.session_state.summary = summary
                 with open("summary.txt", "w") as f:
                     f.write(summary)
@@ -172,8 +176,9 @@ if uploaded_file:
                     data = json.loads(cleaned)
                     with open("server.json", "w") as f:
                         json.dump(data, f, indent=2)
+
             st.rerun()
-        st.stop()
+
     else:
         st.session_state.summary = st.text_area(
             "Overall Summary (Edit if needed):",
@@ -327,7 +332,7 @@ Return 2 sentences describing what should appear in the scene.
                                     scene_videos.append(vid_file)
                                 else:
                                     missing_scenes.append(s['scene_id'])
-                                    # Insert placeholder black video of 1 second
+                                    # Insert placeholder black video of 3 seconds
                                     placeholder = f"placeholder_scene_{s['scene_id']}.mp4"
                                     cmd_placeholder = [
                                         "ffmpeg", "-y",
