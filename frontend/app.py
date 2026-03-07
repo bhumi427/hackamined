@@ -104,8 +104,8 @@ def concatenate_videos(video_files, output_file="final_video.mp4"):
     return output_file
 
 # ----------------- Streamlit Setup -----------------
-st.set_page_config(page_title="Agentic Video Editor", layout="wide")
-st.title("🎬 Agentic Video Editor")
+st.set_page_config(page_title="TraceEdit - Video Editor", layout="wide")
+st.title("🎬 TraceEdit - Video Editor")
 
 CACHE_FILE = "scenes.json"
 uploaded_file = st.file_uploader("Upload Document", type=["pdf"])

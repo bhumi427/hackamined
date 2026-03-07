@@ -1,4 +1,4 @@
-# TraceEdit - AI-Powered Video Generator
+# TraceEdit - AI-Powered Video Editor
 
 ## Overview
 **TraceEdit** is a Python-based application that generates videos from text scripts. The app takes user input, generates scenes with images, synthesizes audio, and merges them into a final video. It leverages AI models for text-to-image generation, script parsing, and text-to-speech conversion.
