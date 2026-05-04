@@ -29,7 +29,7 @@
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/hackamined.git
+git clone https://github.com/bhumi427/hackamined.git
 cd hackamined
 ```
 
